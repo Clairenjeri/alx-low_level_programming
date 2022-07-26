@@ -1,9 +1,9 @@
 #include "main.h"
 
 /**
- * _strlen - count array 
+ * _strlen - count array
  * @s: array of elements
- * 
+ *
  * Return: i
  *
  */
