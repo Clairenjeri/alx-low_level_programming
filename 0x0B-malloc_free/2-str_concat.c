@@ -1,8 +1,11 @@
 #include "main.h"
+
 /**
- * _strlen - count arrray
+ * _strlen - count array 
  * @s: array of elements
+ * 
  * Return: i
+ *
  */
 
 int _strlen(char *s)
