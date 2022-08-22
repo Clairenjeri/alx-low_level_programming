@@ -17,14 +17,12 @@ void print_type(unsigned int e_type, unsigned char *e_ident);
 void print_entry(unsigned long int e_entry, unsigned char *e_ident);
 void close_elf(int elf);
 
-
 /**
  * check_elf - Checks if a file is an ELF file.
  * @e_ident: A pointer to an array containing the ELF magic numbers.
  *
  * Description: If the file is not an ELF file - exit code 98.
  */
-
 void check_elf(unsigned char *e_ident)
 {
 	int index;
@@ -42,14 +40,12 @@ void check_elf(unsigned char *e_ident)
 	}
 }
 
-
 /**
  * print_magic - Prints the magic numbers of an ELF header.
  * @e_ident: A pointer to an array containing the ELF magic numbers.
-
+ *
  * Description: Magic numbers are separated by spaces.
  */
-
 void print_magic(unsigned char *e_ident)
 {
 	int index;
@@ -71,7 +67,6 @@ void print_magic(unsigned char *e_ident)
  * print_class - Prints the class of an ELF header.
  * @e_ident: A pointer to an array containing the ELF class.
  */
-
 void print_class(unsigned char *e_ident)
 {
 	printf("  Class:                             ");
@@ -96,7 +91,6 @@ void print_class(unsigned char *e_ident)
  * print_data - Prints the data of an ELF header.
  * @e_ident: A pointer to an array containing the ELF class.
  */
-
 void print_data(unsigned char *e_ident)
 {
 	printf("  Data:                              ");
@@ -118,10 +112,29 @@ void print_data(unsigned char *e_ident)
 }
 
 /**
+ * print_version - Prints the version of an ELF header.
+ * @e_ident: A pointer to an array containing the ELF version.
+ */
+void print_version(unsigned char *e_ident)
+{
+	printf("  Version:                           %d",
+	       e_ident[EI_VERSION]);
+
+	switch (e_ident[EI_VERSION])
+	{
+	case EV_CURRENT:
+		printf(" (current)\n");
+		break;
+	default:
+		printf("\n");
+		break;
+	}
+}
+
+/**
  * print_osabi - Prints the OS/ABI of an ELF header.
  * @e_ident: A pointer to an array containing the ELF version.
  */
-
 void print_osabi(unsigned char *e_ident)
 {
 	printf("  OS/ABI:                            ");
@@ -146,7 +159,7 @@ void print_osabi(unsigned char *e_ident)
 	case ELFOSABI_IRIX:
 		printf("UNIX - IRIX\n");
 		break;
-		case ELFOSABI_FREEBSD:
+	case ELFOSABI_FREEBSD:
 		printf("UNIX - FreeBSD\n");
 		break;
 	case ELFOSABI_TRU64:
@@ -190,7 +203,7 @@ void print_type(unsigned int e_type, unsigned char *e_ident)
 	case ET_NONE:
 		printf("NONE (None)\n");
 		break;
-		case ET_REL:
+	case ET_REL:
 		printf("REL (Relocatable file)\n");
 		break;
 	case ET_EXEC:
@@ -222,6 +235,7 @@ void print_entry(unsigned long int e_entry, unsigned char *e_ident)
 			  ((e_entry >> 8) & 0xFF00FF);
 		e_entry = (e_entry << 16) | (e_entry >> 16);
 	}
+
 	if (e_ident[EI_CLASS] == ELFCLASS32)
 		printf("%#x\n", (unsigned int)e_entry);
 
@@ -298,4 +312,3 @@ int main(int __attribute__((__unused__)) argc, char *argv[])
 	close_elf(o);
 	return (0);
 }
-
